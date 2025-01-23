@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D302C5B42D425AFA00CE6770 /* LazyScrollPositionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D302C5B32D425AFA00CE6770 /* LazyScrollPositionView.swift */; };
 		D3F935962D40400C008A7A85 /* TestProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F935952D40400C008A7A85 /* TestProjectApp.swift */; };
 		D3F935982D40400C008A7A85 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F935972D40400C008A7A85 /* ContentView.swift */; };
 		D3F9359A2D40400C008A7A85 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F935992D40400C008A7A85 /* Item.swift */; };
@@ -15,6 +16,8 @@
 		D3F935A92D40400E008A7A85 /* TestProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F935A82D40400E008A7A85 /* TestProjectTests.swift */; };
 		D3F935B32D40400E008A7A85 /* TestProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F935B22D40400E008A7A85 /* TestProjectUITests.swift */; };
 		D3F935B52D40400E008A7A85 /* TestProjectUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F935B42D40400E008A7A85 /* TestProjectUITestsLaunchTests.swift */; };
+		D3F935C82D404C4E008A7A85 /* LazyScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F935C72D404C4E008A7A85 /* LazyScrollView.swift */; };
+		D3F935CA2D404C5E008A7A85 /* LazyGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F935C92D404C5E008A7A85 /* LazyGridView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D302C5B32D425AFA00CE6770 /* LazyScrollPositionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyScrollPositionView.swift; sourceTree = "<group>"; };
 		D3F935922D40400C008A7A85 /* TestProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3F935952D40400C008A7A85 /* TestProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestProjectApp.swift; sourceTree = "<group>"; };
 		D3F935972D40400C008A7A85 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -46,6 +50,8 @@
 		D3F935AE2D40400E008A7A85 /* TestProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3F935B22D40400E008A7A85 /* TestProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestProjectUITests.swift; sourceTree = "<group>"; };
 		D3F935B42D40400E008A7A85 /* TestProjectUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestProjectUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D3F935C72D404C4E008A7A85 /* LazyScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyScrollView.swift; sourceTree = "<group>"; };
+		D3F935C92D404C5E008A7A85 /* LazyGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyGridView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +104,9 @@
 			children = (
 				D3F935952D40400C008A7A85 /* TestProjectApp.swift */,
 				D3F935972D40400C008A7A85 /* ContentView.swift */,
+				D3F935C72D404C4E008A7A85 /* LazyScrollView.swift */,
+				D302C5B32D425AFA00CE6770 /* LazyScrollPositionView.swift */,
+				D3F935C92D404C5E008A7A85 /* LazyGridView.swift */,
 				D3F935992D40400C008A7A85 /* Item.swift */,
 				D3F9359B2D40400D008A7A85 /* Assets.xcassets */,
 				D3F9359D2D40400D008A7A85 /* Preview Content */,
@@ -260,8 +269,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D302C5B42D425AFA00CE6770 /* LazyScrollPositionView.swift in Sources */,
 				D3F935982D40400C008A7A85 /* ContentView.swift in Sources */,
+				D3F935C82D404C4E008A7A85 /* LazyScrollView.swift in Sources */,
 				D3F9359A2D40400C008A7A85 /* Item.swift in Sources */,
+				D3F935CA2D404C5E008A7A85 /* LazyGridView.swift in Sources */,
 				D3F935962D40400C008A7A85 /* TestProjectApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -434,6 +446,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -463,6 +476,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -34,10 +34,10 @@ struct LazyScrollPositionView: View {
                 }
                 .scrollTargetLayout()
             }
-            //            .scrollPosition(id: $scrolledID)
+            .scrollPosition(id: $scrolledID)
             .overlay {
                 Text("\(String(describing: scrolledID))")
-                    .background(Color.white)
+                    .background(Color.black)
                     .foregroundStyle(Color.indigo)
             }
             .navigationTitle("LazyScrollPositionView")

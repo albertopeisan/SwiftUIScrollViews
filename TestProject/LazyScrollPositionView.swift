@@ -5,9 +5,9 @@
 //  Created by Alberto Peinado Santana on 23/1/25.
 //
 
+import PhotosUI
 import SwiftUI
 import SwiftData
-import PhotosUI
 
 struct LazyScrollPositionView: View {
     @Environment(\.modelContext) private var modelContext

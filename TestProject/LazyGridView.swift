@@ -39,9 +39,9 @@ struct LazyGridView: View {
             .navigationTitle("LazyVGrid")
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Text("\(items.count) items")
-                }
+//                ToolbarItem(placement: .topBarLeading) {
+//                    Text("\(items.count) items")
+//                }
                 
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {

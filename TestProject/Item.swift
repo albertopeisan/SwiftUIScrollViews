@@ -12,12 +12,26 @@ import SwiftData
 final class Item {
     var id: UUID = UUID()
     var timestamp: Date = Date.now
-    @Attribute(.externalStorage) var photo: Data = Data()
+    @Relationship(deleteRule: .nullify, inverse: \Photo.item) var photos: [Photo]
     
-    init(photo: Data = Data(), timestamp: Date = Date.now) {
-        self.photo = photo
-        self.timestamp = timestamp
+    init(photos: [Photo] = []) {
+        self.photos = photos
     }
 }
 
 extension Item: Identifiable {}
+
+@Model
+final class Photo {
+    var id: UUID = UUID()
+    var timestamp: Date = Date.now
+    @Attribute(.externalStorage)
+    var photo: Data = Data()
+    var item: Item?
+    
+    init(photo: Data = Data()) {
+        self.photo = photo
+    }
+}
+
+extension Photo: Identifiable {}

@@ -22,16 +22,13 @@ struct LazyGridView: View {
                 LazyVGrid(columns: columns) {
                     ForEach(items) { item in
                         NavigationLink {
-                            Image(uiImage: UIImage(data: item.photo)!)
+                            Image(uiImage: UIImage(data: item.photos.first!.photo)!)
                                 .resizable()
                                 .scaledToFit()
                         } label: {
-                            VStack {
-                                Image(uiImage: UIImage(data: item.photo)!)
-                                    .resizable()
-                                    .scaledToFit()
-                            }
-                            .frame(maxWidth: .infinity)
+                            Image(uiImage: UIImage(data: item.photos.first!.photo)!)
+                                .resizable()
+                                .scaledToFit()
                         }
                     }
                 }
@@ -53,7 +50,8 @@ struct LazyGridView: View {
                     do {
                         for item in selectedItems {
                             if let data = try await item.loadTransferable(type: Data.self) {
-                                let item = Item(photo: data)
+                                let photo = Photo(photo: data)
+                                let item = Item(photos: [photo])
                                 modelContext.insert(item)
                             }
                         }

@@ -31,7 +31,6 @@ struct LazyScrollView: View {
                         }
                     }
                 }
-                .scrollTargetLayout()
             }
             .navigationTitle("LazyScrollView")
             .navigationBarTitleDisplayMode(.large)

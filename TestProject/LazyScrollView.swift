@@ -35,10 +35,6 @@ struct LazyScrollView: View {
             .navigationTitle("LazyScrollView")
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
-//                ToolbarItem(placement: .topBarLeading) {
-//                    Text("\(items.count) items")
-//                }
-                
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         isShowingPhotosPicker.toggle()

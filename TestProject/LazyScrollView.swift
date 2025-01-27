@@ -13,17 +13,31 @@ struct LazyScrollView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var isShowingPhotosPicker: Bool = false
     @State private var selectedItems: [PhotosPickerItem] = []
-    @Query private var items: [Item]
+    @Query(sort: \Item.timestamp, order: .reverse) private var items: [Item]
+    
+    // State to manage loaded images
+    @State private var loadedImages: [UUID: UIImage] = [:]
+    @State private var imageCache: NSCache<NSString, UIImage> = {
+        let cache = NSCache<NSString, UIImage>()
+        cache.countLimit = 100 // Set a reasonable limit for the cache size
+        return cache
+    }()
     
     var body: some View {
         NavigationStack {
             ScrollView {
-                LazyVStack {
+                LazyVStack(spacing: 16) {
                     ForEach(items) { item in
                         NavigationLink(value: item) {
-                            Image(uiImage: UIImage(data: item.photo)!)
+                            Image(uiImage: loadedImages[item.id, default: UIImage()])
                                 .resizable()
                                 .scaledToFit()
+                                .onAppear {
+                                    loadImage(for: item)
+                                }
+                                .onDisappear {
+                                    unloadImage(for: item)
+                                }
                         }
                     }
                 }
@@ -40,13 +54,13 @@ struct LazyScrollView: View {
                 }
             }
             .navigationDestination(for: Item.self) { item in
-                Image(uiImage: UIImage(data: item.photo)!)
+                Image(uiImage: loadedImages[item.id, default: UIImage()])
                     .resizable()
                     .scaledToFit()
             }
             .photosPicker(isPresented: $isShowingPhotosPicker, selection: $selectedItems, maxSelectionCount: 100, matching: .images, preferredItemEncoding: .automatic)
             .task(id: selectedItems) {
-                await withTaskGroup(of: Void.self) { group in
+                await withDiscardingTaskGroup { group in
                     for item in selectedItems {
                         group.addTask {
                             if let data = try? await item.loadTransferable(type: Data.self) {
@@ -59,17 +73,44 @@ struct LazyScrollView: View {
                     }
                 }
                 
+                selectedItems.removeAll()
+                
                 do {
                     try modelContext.save()
                 } catch {
                     fatalError(error.localizedDescription)
                 }
-                
-                selectedItems.removeAll()
             }
         }
     }
+    
+    // Function to load image into memory
+    private func loadImage(for item: Item) {
+        guard loadedImages[item.id] == nil else { return }
+        
+        if let cachedImage = imageCache.object(forKey: NSString(string: item.id.uuidString)) {
+            loadedImages[item.id] = cachedImage
+            return
+        }
+        
+        Task {
+            if let image = UIImage(data: item.photo) {
+                await MainActor.run {
+                    loadedImages[item.id] = image
+                    imageCache.setObject(image, forKey: NSString(string: item.id.uuidString))
+                }
+            }
+        }
+    }
+    
+    // Function to unload image from memory
+    private func unloadImage(for item: Item) {
+        loadedImages.removeValue(forKey: item.id)
+        // Optionally, remove from cache as well if needed
+        // imageCache.removeObject(forKey: NSString(string: item.id.uuidString))
+    }
 }
+
 
 #Preview {
     LazyScrollView()

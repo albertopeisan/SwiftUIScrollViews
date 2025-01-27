@@ -20,11 +20,7 @@ struct LazyScrollView: View {
             ScrollView {
                 LazyVStack {
                     ForEach(items) { item in
-                        NavigationLink {
-                            Image(uiImage: UIImage(data: item.photo)!)
-                                .resizable()
-                                .scaledToFit()
-                        } label: {
+                        NavigationLink(value: item) {
                             Image(uiImage: UIImage(data: item.photo)!)
                                 .resizable()
                                 .scaledToFit()
@@ -43,23 +39,33 @@ struct LazyScrollView: View {
                     }
                 }
             }
+            .navigationDestination(for: Item.self) { item in
+                Image(uiImage: UIImage(data: item.photo)!)
+                    .resizable()
+                    .scaledToFit()
+            }
             .photosPicker(isPresented: $isShowingPhotosPicker, selection: $selectedItems, maxSelectionCount: 100, matching: .images, preferredItemEncoding: .automatic)
-            .onChange(of: selectedItems) {
-                Task {
-                    do {
-                        for item in selectedItems {
-                            if let data = try await item.loadTransferable(type: Data.self) {
-                                let item = Item(photo: data)
-                                modelContext.insert(item)
+            .task(id: selectedItems) {
+                await withTaskGroup(of: Void.self) { group in
+                    for item in selectedItems {
+                        group.addTask {
+                            if let data = try? await item.loadTransferable(type: Data.self) {
+                                let newItem = Item(photo: data)
+                                await MainActor.run {
+                                    modelContext.insert(newItem)
+                                }
                             }
                         }
-                        
-                        try modelContext.save()
-                        selectedItems = []
-                    } catch {
-                        fatalError(error.localizedDescription)
                     }
                 }
+                
+                do {
+                    try modelContext.save()
+                } catch {
+                    fatalError(error.localizedDescription)
+                }
+                
+                selectedItems.removeAll()
             }
         }
     }

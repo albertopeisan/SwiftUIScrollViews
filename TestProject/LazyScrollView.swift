@@ -46,7 +46,7 @@ struct LazyScrollView: View {
             }
             .photosPicker(isPresented: $isShowingPhotosPicker, selection: $selectedItems, maxSelectionCount: 100, matching: .images, preferredItemEncoding: .automatic)
             .task(id: selectedItems) {
-                await withTaskGroup(of: Void.self) { group in
+                await withDiscardingTaskGroup { group in
                     for item in selectedItems {
                         group.addTask {
                             if let data = try? await item.loadTransferable(type: Data.self) {
@@ -59,13 +59,13 @@ struct LazyScrollView: View {
                     }
                 }
                 
+                selectedItems.removeAll()
+                
                 do {
                     try modelContext.save()
                 } catch {
                     fatalError(error.localizedDescription)
                 }
-                
-                selectedItems.removeAll()
             }
         }
     }

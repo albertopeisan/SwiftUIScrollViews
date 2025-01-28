@@ -21,23 +21,21 @@ struct LazyGridView: View {
             ScrollView {
                 LazyVGrid(columns: columns) {
                     ForEach(items) { item in
-                        NavigationLink {
+                        NavigationLink(value: item) {
                             Image(uiImage: UIImage(data: item.photo)!)
                                 .resizable()
                                 .scaledToFit()
-                        } label: {
-                            VStack {
-                                Image(uiImage: UIImage(data: item.photo)!)
-                                    .resizable()
-                                    .scaledToFit()
-                            }
-                            .frame(maxWidth: .infinity)
                         }
                     }
                 }
             }
-            .navigationTitle("LazyVGrid")
-            .navigationBarTitleDisplayMode(.large)
+            .navigationTitle("LazyGrid")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationDestination(for: Item.self) { item in
+                Image(uiImage: UIImage(data: item.photo)!)
+                    .resizable()
+                    .scaledToFit()
+            }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -48,21 +46,26 @@ struct LazyGridView: View {
                 }
             }
             .photosPicker(isPresented: $isShowingPhotosPicker, selection: $selectedItems, maxSelectionCount: 100, matching: .images, preferredItemEncoding: .automatic)
-            .onChange(of: selectedItems) {
-                Task {
-                    do {
-                        for item in selectedItems {
-                            if let data = try await item.loadTransferable(type: Data.self) {
-                                let item = Item(photo: data)
-                                modelContext.insert(item)
+            .task(id: selectedItems) {
+                await withDiscardingTaskGroup { group in
+                    for item in selectedItems {
+                        group.addTask {
+                            if let data = try? await item.loadTransferable(type: Data.self) {
+                                let newItem = Item(photo: data)
+                                await MainActor.run {
+                                    modelContext.insert(newItem)
+                                }
                             }
                         }
-                        
-                        try modelContext.save()
-                        selectedItems = []
-                    } catch {
-                        fatalError(error.localizedDescription)
                     }
+                }
+                
+                selectedItems.removeAll()
+                
+                do {
+                    try modelContext.save()
+                } catch {
+                    fatalError(error.localizedDescription)
                 }
             }
         }

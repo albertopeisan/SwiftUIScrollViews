@@ -29,7 +29,12 @@ struct LazyScrollView: View {
                 }
             }
             .navigationTitle("LazyScrollView")
-            .navigationBarTitleDisplayMode(.large)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationDestination(for: Item.self) { item in
+                Image(uiImage: UIImage(data: item.photo)!)
+                    .resizable()
+                    .scaledToFit()
+            }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -38,11 +43,6 @@ struct LazyScrollView: View {
                         Label("Add Item", systemImage: "plus")
                     }
                 }
-            }
-            .navigationDestination(for: Item.self) { item in
-                Image(uiImage: UIImage(data: item.photo)!)
-                    .resizable()
-                    .scaledToFit()
             }
             .photosPicker(isPresented: $isShowingPhotosPicker, selection: $selectedItems, maxSelectionCount: 100, matching: .images, preferredItemEncoding: .automatic)
             .task(id: selectedItems) {

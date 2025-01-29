@@ -18,14 +18,10 @@ struct LazyScrollPositionView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
+            ScrollView(.vertical) {
                 LazyVStack {
                     ForEach(items) { item in
-                        NavigationLink {
-                            Image(uiImage: UIImage(data: item.photo)!)
-                                .resizable()
-                                .scaledToFit()
-                        } label: {
+                        NavigationLink(value: item) {
                             Image(uiImage: UIImage(data: item.photo)!)
                                 .resizable()
                                 .scaledToFit()

@@ -18,7 +18,7 @@ struct LazyGridView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
+            ScrollView(.vertical) {
                 LazyVGrid(columns: columns) {
                     ForEach(items) { item in
                         NavigationLink(value: item) {

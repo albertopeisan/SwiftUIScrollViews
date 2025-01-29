@@ -17,7 +17,7 @@ struct LazyScrollView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
+            ScrollView(.vertical) {
                 LazyVStack {
                     ForEach(items) { item in
                         NavigationLink(value: item) {

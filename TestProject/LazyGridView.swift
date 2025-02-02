@@ -19,26 +19,21 @@ struct LazyGridView: View {
     var body: some View {
         NavigationStack {
             ScrollView(.vertical) {
-                LazyVGrid(columns: columns) {
+                LazyVGrid(columns: columns, spacing: 1) {
                     ForEach(items) { item in
-                        NavigationLink(value: item) {
-                            RowImageView(imageData: item.photo!)
+                        GeometryReader { geo in
+                            NavigationLink(value: item) {
+                                GridImageView(data: item.photo!, size: geo.size)
+                            }
                         }
+                        .aspectRatio(1, contentMode: .fit)
                     }
                 }
             }
             .navigationTitle("LazyGrid")
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(for: Item.self) { item in
-                if let data = item.photo, let uiImage = UIImage(data: data) {
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                } else {
-                    Image("placeholder")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                }
+                Text("Image")
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {

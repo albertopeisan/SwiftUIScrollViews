@@ -17,11 +17,13 @@ struct LazyScrollView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView(.vertical) {
-                LazyVStack {
-                    ForEach(items) { item in
-                        NavigationLink(value: item) {
-                            RowImageView(imageData: item.photo!)
+            GeometryReader { geo in
+                ScrollView(.vertical) {
+                    LazyVStack {
+                        ForEach(items) { item in
+                            NavigationLink(value: item) {
+                                RowImageView(data: item.photo!, size: geo.size)
+                            }
                         }
                     }
                 }

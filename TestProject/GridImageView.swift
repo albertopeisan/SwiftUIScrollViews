@@ -1,13 +1,14 @@
 //
-//  RowImageView.swift
+//  GridImageView.swift
 //  TestProject
 //
-//  Created by Alberto Peinado Santana on 29/1/25.
+//  Created by Alberto Peinado Santana on 2/2/25.
 //
 
+import Foundation
 import SwiftUI
 
-struct RowImageView: View {
+struct GridImageView: View {
     var data: Data?
     let size: CGSize
     
@@ -15,7 +16,9 @@ struct RowImageView: View {
         if let imageData = data, let uiImage = downsample(data: imageData, size: size) {
             Image(uiImage: uiImage)
                 .resizable()
-                .scaledToFit()
+                .scaledToFill()
+                .frame(width: size.width, height: size.width)
+                .clipped()
         } else {
             Image("placeholder")
                 .resizable()
@@ -38,7 +41,7 @@ struct RowImageView: View {
             kCGImageSourceCreateThumbnailFromImageAlways: true,
             kCGImageSourceShouldCacheImmediately: true,
             kCGImageSourceCreateThumbnailWithTransform: true,
-            kCGImageSourceThumbnailMaxPixelSize: max(size.width, size.width * aspectRatio) * UIScreen.main.scale
+            kCGImageSourceThumbnailMaxPixelSize: max(size.width, size.width * aspectRatio) * 1
         ] as CFDictionary
         
         guard let downsampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, downsampleOptions) else {
@@ -59,7 +62,3 @@ struct RowImageView: View {
         return width / height
     }
 }
-
-//#Preview {
-//    RowImageView()
-//}

@@ -21,9 +21,7 @@ struct LazyScrollView: View {
                 LazyVStack {
                     ForEach(items) { item in
                         NavigationLink(value: item) {
-                            Image(uiImage: UIImage(data: item.photo)!)
-                                .resizable()
-                                .scaledToFit()
+                            RowImageView(imageData: item.photo!)
                         }
                     }
                 }
@@ -31,9 +29,15 @@ struct LazyScrollView: View {
             .navigationTitle("LazyScrollView")
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(for: Item.self) { item in
-                Image(uiImage: UIImage(data: item.photo)!)
-                    .resizable()
-                    .scaledToFit()
+                if let data = item.photo, let uiImage = UIImage(data: data) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                } else {
+                    Image("placeholder")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {

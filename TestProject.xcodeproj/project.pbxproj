@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D302C5B42D425AFA00CE6770 /* LazyScrollPositionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D302C5B32D425AFA00CE6770 /* LazyScrollPositionView.swift */; };
+		D34F02B52D4FC9B500797863 /* ModelContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34F02B42D4FC9B500797863 /* ModelContext.swift */; };
+		D3A3F9E62D4AE4C600A95F57 /* RowImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3F9E52D4AE4C600A95F57 /* RowImageView.swift */; };
 		D3F935962D40400C008A7A85 /* TestProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F935952D40400C008A7A85 /* TestProjectApp.swift */; };
 		D3F935982D40400C008A7A85 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F935972D40400C008A7A85 /* ContentView.swift */; };
 		D3F9359A2D40400C008A7A85 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F935992D40400C008A7A85 /* Item.swift */; };
@@ -39,6 +41,8 @@
 
 /* Begin PBXFileReference section */
 		D302C5B32D425AFA00CE6770 /* LazyScrollPositionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyScrollPositionView.swift; sourceTree = "<group>"; };
+		D34F02B42D4FC9B500797863 /* ModelContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelContext.swift; sourceTree = "<group>"; };
+		D3A3F9E52D4AE4C600A95F57 /* RowImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowImageView.swift; sourceTree = "<group>"; };
 		D3F935922D40400C008A7A85 /* TestProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3F935952D40400C008A7A85 /* TestProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestProjectApp.swift; sourceTree = "<group>"; };
 		D3F935972D40400C008A7A85 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -107,7 +111,9 @@
 				D3F935C72D404C4E008A7A85 /* LazyScrollView.swift */,
 				D302C5B32D425AFA00CE6770 /* LazyScrollPositionView.swift */,
 				D3F935C92D404C5E008A7A85 /* LazyGridView.swift */,
+				D3A3F9E52D4AE4C600A95F57 /* RowImageView.swift */,
 				D3F935992D40400C008A7A85 /* Item.swift */,
+				D34F02B42D4FC9B500797863 /* ModelContext.swift */,
 				D3F9359B2D40400D008A7A85 /* Assets.xcassets */,
 				D3F9359D2D40400D008A7A85 /* Preview Content */,
 			);
@@ -272,6 +278,8 @@
 				D302C5B42D425AFA00CE6770 /* LazyScrollPositionView.swift in Sources */,
 				D3F935982D40400C008A7A85 /* ContentView.swift in Sources */,
 				D3F935C82D404C4E008A7A85 /* LazyScrollView.swift in Sources */,
+				D34F02B52D4FC9B500797863 /* ModelContext.swift in Sources */,
+				D3A3F9E62D4AE4C600A95F57 /* RowImageView.swift in Sources */,
 				D3F9359A2D40400C008A7A85 /* Item.swift in Sources */,
 				D3F935CA2D404C5E008A7A85 /* LazyGridView.swift in Sources */,
 				D3F935962D40400C008A7A85 /* TestProjectApp.swift in Sources */,

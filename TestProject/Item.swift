@@ -12,7 +12,7 @@ import SwiftData
 final class Item {
     var id: UUID = UUID()
     var timestamp: Date = Date.now
-    @Attribute(.externalStorage) var photo: Data = Data()
+    @Attribute(.externalStorage) var photo: Data? = nil
     
     init(photo: Data = Data(), timestamp: Date = Date.now) {
         self.photo = photo

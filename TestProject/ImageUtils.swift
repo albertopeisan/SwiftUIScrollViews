@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-func downsampledImage(data: Data, size: CGSize) -> UIImage? {
+func downsampledImage(data: Data, size: CGSize, scale: CGFloat = UIScreen.main.scale) -> UIImage? {
     let imageSourceOptions = [kCGImageSourceShouldCache: false] as CFDictionary
     
     guard let imageSource = CGImageSourceCreateWithData(data as CFData, imageSourceOptions) else {
@@ -23,7 +23,7 @@ func downsampledImage(data: Data, size: CGSize) -> UIImage? {
         kCGImageSourceCreateThumbnailFromImageAlways: true,
         kCGImageSourceShouldCacheImmediately: true,
         kCGImageSourceCreateThumbnailWithTransform: true,
-        kCGImageSourceThumbnailMaxPixelSize: max(size.width, size.width * aspectRatio) * UIScreen.main.scale
+        kCGImageSourceThumbnailMaxPixelSize: max(size.width, size.width * aspectRatio) * scale
     ] as CFDictionary
     
     guard let downsampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, downsampleOptions) else {

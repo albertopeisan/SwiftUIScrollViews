@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-final class Item {
+final class Item: Identifiable {
     var id: UUID = UUID()
     var timestamp: Date = Date.now
     @Attribute(.externalStorage) var photo: Data? = nil
@@ -19,5 +19,3 @@ final class Item {
         self.timestamp = timestamp
     }
 }
-
-extension Item: Identifiable {}

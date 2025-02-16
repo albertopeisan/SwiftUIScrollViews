@@ -33,7 +33,18 @@ struct LazyGridView: View {
             .navigationTitle("LazyGrid")
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(for: Item.self) { item in
-                Text("Image")
+                GeometryReader { geo in
+                    if let imageData = item.photo, let uiImage = downsampledImage(data: imageData, size: geo.size) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .scaledToFill()
+                            .clipped()
+                    } else {
+                        Image("placeholder")
+                            .resizable()
+                            .scaledToFit()
+                    }
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {

@@ -1,13 +1,13 @@
 //
-//  TestProjectUITestsLaunchTests.swift
-//  TestProjectUITests
+//  SwiftUIScrollViewsUITestsLaunchTests.swift
+//  SwiftUIScrollViewsUITests
 //
 //  Created by Alberto Peinado Santana on 21/1/25.
 //
 
 import XCTest
 
-final class TestProjectUITestsLaunchTests: XCTestCase {
+final class SwiftUIScrollViewsUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

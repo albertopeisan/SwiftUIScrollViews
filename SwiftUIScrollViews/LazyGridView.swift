@@ -1,53 +1,39 @@
 //
-//  LazyScrollPositionView.swift
-//  TestProject
+//  LazyGridView.swift
+//  SwiftUIScrollViews
 //
-//  Created by Alberto Peinado Santana on 23/1/25.
+//  Created by Alberto Peinado Santana on 21/1/25.
 //
 
 import PhotosUI
 import SwiftUI
 import SwiftData
 
-struct LazyScrollPositionView: View {
+struct LazyGridView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var isShowingPhotosPicker: Bool = false
     @State private var selectedItems: [PhotosPickerItem] = []
-    @State private var scrolledID: Item.ID?
     @Query private var items: [Item]
+    let columns: [GridItem] = Array(repeating: GridItem(.flexible(), spacing: 1, alignment: .top), count: 3)
     
     var body: some View {
         NavigationStack {
-            GeometryReader { geo in
-                ScrollView(.vertical) {
-                    LazyVStack {
-                        ForEach(items) { item in
+            ScrollView(.vertical) {
+                LazyVGrid(columns: columns, spacing: 1) {
+                    ForEach(items) { item in
+                        GeometryReader { geo in
                             NavigationLink(value: item) {
-                                RowImageView(data: item.photo!, size: geo.size)
+                                GridImageView(data: item.photo!, size: geo.size)
                             }
                         }
+                        .aspectRatio(1, contentMode: .fit)
                     }
-                    .scrollTargetLayout()
                 }
             }
-            .scrollPosition(id: $scrolledID)
-            .overlay {
-                Text("\(String(describing: scrolledID))")
-                    .background(Color.black)
-                    .foregroundStyle(Color.indigo)
-            }
-            .navigationTitle("LazyScrollPosition")
+            .navigationTitle("LazyGrid")
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(for: Item.self) { item in
-                if let data = item.photo, let uiImage = UIImage(data: data) {
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                } else {
-                    Image("placeholder")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                }
+                Text("Image")
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -86,5 +72,5 @@ struct LazyScrollPositionView: View {
 }
 
 #Preview {
-    LazyScrollPositionView()
+    LazyGridView()
 }

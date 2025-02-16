@@ -1,6 +1,6 @@
 //
-//  TestProjectApp.swift
-//  TestProject
+//  SwiftUIScrollViewsApp.swift
+//  SwiftUIScrollViews
 //
 //  Created by Alberto Peinado Santana on 21/1/25.
 //
@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 @main
-struct TestProjectApp: App {
+struct SwiftUIScrollViewsApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self

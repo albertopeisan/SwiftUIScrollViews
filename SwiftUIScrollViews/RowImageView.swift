@@ -1,14 +1,13 @@
 //
-//  GridImageView.swift
-//  TestProject
+//  RowImageView.swift
+//  SwiftUIScrollViews
 //
-//  Created by Alberto Peinado Santana on 2/2/25.
+//  Created by Alberto Peinado Santana on 29/1/25.
 //
 
-import Foundation
 import SwiftUI
 
-struct GridImageView: View {
+struct RowImageView: View {
     var data: Data?
     let size: CGSize
     
@@ -16,9 +15,7 @@ struct GridImageView: View {
         if let imageData = data, let uiImage = downsampledImage(data: imageData, size: size) {
             Image(uiImage: uiImage)
                 .resizable()
-                .scaledToFill()
-                .frame(width: size.width, height: size.width)
-                .clipped()
+                .scaledToFit()
         } else {
             Image("placeholder")
                 .resizable()
@@ -26,3 +23,7 @@ struct GridImageView: View {
         }
     }
 }
+
+//#Preview {
+//    RowImageView()
+//}

@@ -1,14 +1,14 @@
 //
-//  TestProjectTests.swift
-//  TestProjectTests
+//  SwiftUIScrollViewsTests.swift
+//  SwiftUIScrollViewsTests
 //
 //  Created by Alberto Peinado Santana on 21/1/25.
 //
 
 import XCTest
-@testable import TestProject
+@testable import SwiftUIScrollViews
 
-final class TestProjectTests: XCTestCase {
+final class SwiftUIScrollViewsTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

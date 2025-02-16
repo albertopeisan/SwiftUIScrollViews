@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  TestProject
+//  SwiftUIScrollViews
 //
 //  Created by Alberto Peinado Santana on 21/1/25.
 //
